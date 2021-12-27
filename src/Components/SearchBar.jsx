@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import { AiOutlineCloseCircle } from "react-icons/ai";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { SearchDropDown } from "./SearchDropDown";
+import { WatchListContext } from "../Contexts/WatchListContextProvider";
 export const SearchBar = () => {
   const [search, setSearch] = useState("");
+  const {handleSearch}=useContext(WatchListContext)
   const inputref = useRef(null);
-  
+
   return (
     <>
       <Searchdiv>
@@ -13,6 +15,7 @@ export const SearchBar = () => {
           ref={inputref}
           onChange={(e) => {
             setSearch(e.target.value);
+            handleSearch(e.target.value);
           }}
           className="input"
           type="text"
@@ -25,6 +28,7 @@ export const SearchBar = () => {
           onClick={() => {
             setSearch("");
             inputref.current.value = "";
+            handleSearch("")
           }}
         />
       </Searchdiv>

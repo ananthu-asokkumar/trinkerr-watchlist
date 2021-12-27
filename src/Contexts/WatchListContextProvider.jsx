@@ -4,10 +4,13 @@ export const WatchListContext = createContext({
   watchlist: [],
   handleWatchListAdd: () => {},
   handleWatchListDelete: () => { },
-  handleClearList:()=>{}
+  handleClearList: () => { },
+  handleSearch: ()=> { },
+    input:"",
 });
 export const WatchListContextProvider = ({ children }) => {
   const [watchlist, setWatchList] = useState([]);
+  const [input,setInput]=useState("")
 
   const handleWatchListAdd = (e) => {
     setWatchList([e, ...watchlist]);
@@ -23,7 +26,9 @@ export const WatchListContextProvider = ({ children }) => {
   const handleClearList = () => {
     setWatchList([]);
   }
-
+  const handleSearch = (e) => {
+  setInput(e.trim())
+}
  
 
   return (
@@ -32,7 +37,9 @@ export const WatchListContextProvider = ({ children }) => {
         handleWatchListAdd,
         handleWatchListDelete,
         watchlist,
-        handleClearList
+        handleClearList,
+        handleSearch,
+        input
       }}
     >
       {children}
