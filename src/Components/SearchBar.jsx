@@ -5,7 +5,7 @@ import { SearchDropDown } from "./SearchDropDown";
 export const SearchBar = () => {
   const [search, setSearch] = useState("");
   const inputref = useRef(null);
-  console.log(search);
+  
   return (
     <>
       <Searchdiv>
@@ -28,7 +28,10 @@ export const SearchBar = () => {
           }}
         />
       </Searchdiv>
-      <SearchDropDown search={search} />
+      {
+        
+      search.trim()!==""&&<SearchDropDown search={search} />
+      }
     </>
   );
 };
@@ -38,7 +41,7 @@ const Searchdiv = styled.div`
   justify-content: space-between;
   width: 60%;
   margin-left: 20%;
-  height: 2.4rem;
+  height: 3rem;
   border: 1px solid #ccc6c6;
   margin-top: 2rem;
 
@@ -47,6 +50,7 @@ const Searchdiv = styled.div`
     padding-left: 1rem;
     font-size: 1rem;
     border: none;
+
   }
   .input:focus {
     outline: none;
@@ -58,7 +62,8 @@ const Searchdiv = styled.div`
   .close {
     font-size: 2rem;
     color: #ccc6c6;
-    margin-top: 0.2rem;
+    margin-top: 0.5rem;
+    margin-right: .7rem;
     &:hover {
       cursor: pointer;
     }

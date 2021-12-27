@@ -1,35 +1,41 @@
-import { createContext, useState } from "react"
-import data from '../data.json'
+import { createContext, useState } from "react";
 
-export const WatchListContext=createContext({watchlist:[],handleWatchListAdd:()=>{},handleWatchListDelete:()=>{}})
-export const WatchListContextProvider = ({children}) => {
-    const [watchlist, setWatchList] = useState([]);
+export const WatchListContext = createContext({
+  watchlist: [],
+  handleWatchListAdd: () => {},
+  handleWatchListDelete: () => { },
+  handleClearList:()=>{}
+});
+export const WatchListContextProvider = ({ children }) => {
+  const [watchlist, setWatchList] = useState([]);
 
-    const handleWatchListAdd = (e) => {
-        console.log(e);
-        // let res = data.filter((el) => {
-            
-        //     if (e === el[0]) {
-        //         return 1;
-        //     }
-        //     return 0;
+  const handleWatchListAdd = (e) => {
+    setWatchList([e, ...watchlist]);
+  };
 
-        // })
-        setWatchList([e,...watchlist]);
-    }
+  const handleWatchListDelete = (e) => {
+    let res = watchlist.filter((el) => {
+      return el !== e;
+    });
+    setWatchList(res);
+  };
 
-    const handleWatchListDelete = (e) => {
-        let res = watchlist.filter((el) => {
-            return el !== e;
-        });
-        setWatchList(res);
+  const handleClearList = () => {
+    setWatchList([]);
+  }
 
-    }
+ 
 
-    return (
-        <WatchListContext.Provider value={{handleWatchListAdd,handleWatchListDelete,watchlist}}>
-            {children}
-        </WatchListContext.Provider>
-    )
-}
-
+  return (
+    <WatchListContext.Provider
+      value={{
+        handleWatchListAdd,
+        handleWatchListDelete,
+        watchlist,
+        handleClearList
+      }}
+    >
+      {children}
+    </WatchListContext.Provider>
+  );
+};
