@@ -6,15 +6,16 @@ export const WatchListContextProvider = ({children}) => {
     const [watchlist, setWatchList] = useState([]);
 
     const handleWatchListAdd = (e) => {
-        let res = data.filter((el) => {
+        console.log(e);
+        // let res = data.filter((el) => {
             
-            if (e === el[0]) {
-                return 1;
-            }
-            return 0;
+        //     if (e === el[0]) {
+        //         return 1;
+        //     }
+        //     return 0;
 
-        })
-        setWatchList(res);
+        // })
+        setWatchList([e,...watchlist]);
     }
 
     const handleWatchListDelete = (e) => {
